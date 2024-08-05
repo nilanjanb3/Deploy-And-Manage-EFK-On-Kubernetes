@@ -53,6 +53,8 @@ spec:
               readOnly: true
             - name: configpath
               mountPath: /fluentd/etc
+              # subPath: fluent.conf
+              readOnly: true
       terminationGracePeriodSeconds: 30
       volumes:
         - name: varlog
@@ -62,5 +64,5 @@ spec:
           hostPath:
             path: /var/lib/docker/containers
         - name: configpath
-          hostPath:
-            path: /root/fluentd/etc
+          configMap:
+            name: fluentd-config
